@@ -5,17 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Freelancer - Start Bootstrap Theme</title>
+        <title>DWES - IZV</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/avataaars.svg') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{{ asset('assets/style/styles.css')}}" rel="stylesheet" />
-
+        <link href="{{ asset('assets/style/styles.css') }}" rel="stylesheet" />
+        @yield('css')
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -28,23 +28,46 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a></li>
+                        <!-- <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{ { route('aboutNombre') } }">About 1</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{ { url('aboutRuta') } }">About 2</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{ { action([App\Http\Controllers\MainController::class, 'aboutMetodo']) } }">About 3</a></li> -->
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" target="izv" href="https://ieszaidinvergeles.org">IES ZV</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('portfolio') }}">Portfolio</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('about') }}">About</a></li>
+                        <!--<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('array') }}">Array</a></li>-->
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('alumno.index') }}">Alumno</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Masthead-->
         <header class="masthead bg-primary text-white text-center">
+            @error('error') <!-- si llega un mensaje de tipo error con nombre error -->
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <div class="alert alert-danger" role="alert">
+                        {{ $message }}
+                    </div>
+                </div>
+            </div>
+            @enderror
+            @session('success') <!-- si llega una variable en la sesión de nombre success -->
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <div class="alert alert-info" role="alert">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            </div>
+            @endsession
+            @yield('before-content')
             @yield('content')
+            @yield('after-content')
         </header>
-        <!-- Portfolio Section-->
-        
         <!-- About Section-->
         
-                <!-- Contact Section Form-->
-             
+        <!-- Contact Section-->
+        
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container">
@@ -86,7 +109,8 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="{{ asset('assets/script/scripts.js')}}"></script>
+        <script src="{{ asset('assets/script/scripts.js') }}"></script>
+        @yield('script')
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
